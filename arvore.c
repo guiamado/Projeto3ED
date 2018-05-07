@@ -12,6 +12,7 @@ arvGen* cria_arvore (int c);
 void insere_arvore (arvGen* a, arvGen* sa);
 void imprime_arvore (arvGen* a);
 int busca ( arvGen* a, int c );
+void libera_arvore ( arvGen* a );
 
 int main (){
     /* criando nodes da arvore */
@@ -30,6 +31,8 @@ int main (){
     
     busca(node1,8);
     busca(node1,22);
+
+    libera_arvore(node1);
 
     return 0;
 }
@@ -77,4 +80,15 @@ int busca ( arvGen* a, int c ){
 		}
 	}
 		return 0;
+}
+
+void libera_arvore ( arvGen* a ){
+	arvGen* p = a->prim;
+
+	while ( p != NULL ) {
+		arvGen* t = p->prox;
+		libera_arvore(p);
+		p = t;
+	}
+	free(a);
 }
