@@ -11,6 +11,7 @@ typedef struct arvgen arvGen;
 arvGen* cria_arvore (int c);
 void insere_arvore (arvGen* a, arvGen* sa);
 void imprime_arvore (arvGen* a);
+int busca ( arvGen* a, int c );
 
 int main (){
     /* criando nodes da arvore */
@@ -26,6 +27,9 @@ int main (){
     insere_arvore(node1, node4);
 
     imprime_arvore(node1);
+    
+    busca(node1,8);
+    busca(node1,22);
 
     return 0;
 }
@@ -55,4 +59,22 @@ void imprime_arvore (arvGen* a){
     }
     
     printf(">");
+}
+
+int busca ( arvGen* a, int c ){
+	arvGen* p;
+
+	if ( a->info == c ){
+		printf("Achou o elemento %d", c);
+		return 1;
+	}
+	else {
+		for ( p = a->prim; p != NULL; p = p->prox ) {
+			if( busca(p,c) ){
+				printf("Achou o elemento %d", c);
+				return 1;
+			}
+		}
+	}
+		return 0;
 }
